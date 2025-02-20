@@ -6,20 +6,16 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
+        // thread safe
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Bouncers");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JFrame frame = new JFrame("Bouncers");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(new Board(50));
 
-        frame.add(new Board(50));
-//        final Board board = new Board(50);
-//        frame.getContentPane().add(board, BorderLayout.CENTER);
-
-        frame.setSize(500, 600);
-        frame.setLayout(null);
-
-
-
-        frame.pack();
-        frame.setVisible(true);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
