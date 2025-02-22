@@ -9,7 +9,7 @@ public class Board extends JPanel implements ActionListener {
 
     private List<Entity> entities;
     private final Timer timer;
-    private static final int DELAY = 30;
+    private static final int DELAY = 20;
     private static final Random random = new Random();
 
     public Board(int nbEntities) {
