@@ -16,7 +16,7 @@ abstract public class Entity extends JComponent {
         this.movement = DirectionVector.randomDirection(1, 5);
     }
 
-    public void move(JPanel panel) {
+    public void move(GraphicalWindow panel) {
         int panelWidth = panel.getWidth();
         int panelHeight = panel.getHeight();
 
@@ -26,5 +26,5 @@ abstract public class Entity extends JComponent {
         if(x <= 0 || x + size >= panelWidth) movement.invertX();
     }
 
-    public abstract void draw(Graphics g);
+    public abstract void draw();
 }
