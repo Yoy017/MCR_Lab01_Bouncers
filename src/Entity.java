@@ -16,7 +16,8 @@ abstract public class Entity extends JComponent {
         this.movement = DirectionVector.randomDirection(1, 5);
     }
 
-    public void move(GraphicalWindow panel) {
+    public void move() {
+        GraphicalWindow panel = GraphicalWindow.getInstance();
         int panelWidth = panel.getWidth();
         int panelHeight = panel.getHeight();
 

@@ -15,7 +15,6 @@ public class GraphicalWindow implements Displayer {
     private final int height = 600;
 
     private GraphicalWindow() {
-//        setPreferredSize(new Dimension(500, 600));
         // update the board every DELAY ms
         frame = new JFrame("Bouncers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
