@@ -27,5 +27,5 @@ abstract public class Entity extends JComponent {
         if(x <= 0 || x + size >= panelWidth) movement.invertX();
     }
 
-    public abstract void draw();
+    public abstract void draw(Graphics g);
 }

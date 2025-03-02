@@ -2,10 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class GraphicalWindow implements Displayer {
+public class GraphicalWindow extends JPanel implements Displayer {
 
     private static GraphicalWindow instance;
     private JFrame frame;
@@ -13,15 +14,18 @@ public class GraphicalWindow implements Displayer {
 
     private final int width = 500;
     private final int height = 600;
+    private List<Entity> entities;
+
 
     private GraphicalWindow() {
         // update the board every DELAY ms
-        frame = new JFrame("Bouncers");
+        frame.setTitle("Bouncers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel = new JPanel();
+        //panel = new JPanel();
+        frame.setSize(width, height);
         frame.setPreferredSize(new Dimension(width, height));
-        frame.pack();
-        frame.setContentPane(panel);
+        //frame.pack();
+        frame.setContentPane(this);
         frame.setVisible(true);
     }
 
@@ -33,19 +37,19 @@ public class GraphicalWindow implements Displayer {
     }
 
     public int getWidth() {
-        return panel.getWidth();
+        return frame.getWidth();
     }
 
     public int getHeight() {
-        return panel.getHeight();
+        return frame.getHeight();
     }
 
     public Graphics2D getGraphics() {
-        return (Graphics2D) panel.getGraphics();
+        return (Graphics2D) super.getGraphics();
     }
 
     public void repaint() {
-        panel.repaint();
+        super.repaint();
     }
 
     public void setTitle(String title) {
@@ -59,10 +63,13 @@ public class GraphicalWindow implements Displayer {
 //        repaint();
 //    }
 //
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        for (Entity entity : entities)
-//            entity.draw(g);
-//    }
+    public void setEntities(List<Entity> entities) {
+        this.entities = entities;
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (Entity entity : entities)
+            entity.draw(g);
+    }
 }

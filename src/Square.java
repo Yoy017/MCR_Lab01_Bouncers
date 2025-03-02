@@ -6,8 +6,7 @@ public class Square extends Entity {
     }
 
     @Override
-    public void draw() {
-        Graphics g = GraphicalWindow.getInstance().getGraphics();
+    public void draw(Graphics g) {
         g.setColor(color);
         g.fillRect(x, y, size, size);
         g.setColor(Color.BLACK);
