@@ -19,7 +19,7 @@ public class GraphicalWindow extends JPanel implements Displayer {
 
     private GraphicalWindow() {
         // update the board every DELAY ms
-        frame.setTitle("Bouncers");
+        frame = new JFrame("Bouncers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //panel = new JPanel();
         frame.setSize(width, height);
