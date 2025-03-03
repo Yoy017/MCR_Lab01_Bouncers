@@ -1,69 +1,65 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+/**
+ * @brief Classe principale de l'application Bouncers.
+ *
+ * Cette classe gère la liste des entités, leur création et leur animation.
+ * Elle utilise un Timer pour mettre à jour périodiquement les positions
+ * des entités et notifier la fenêtre graphique des changements.
+ */
 public class BouncersApp {
-
+    /** Liste des entités animées */
     private final LinkedList<Entity> bouncers = new LinkedList<>();
-    /* added */
-    private final int nbEntities = 50;
+
+    /** Délai entre les mises à jour en millisecondes */
     private static final int DELAY = 20;
-   // private final Timer timer = new Timer(DELAY, this);
+
+    /** Nombre d'entités à créer */
+    private static final int nbBouncers = 50;
+
+    /** Panneau personnalisé pour le dessin des entités */
+    private final BouncersPanel bouncersPanel;
 
     public BouncersApp() {
-        GraphicalWindow window = GraphicalWindow.getInstance();
+        // Créer les entités
+        createEntities(800, 600); // Dimensions initiales par défaut
 
-        for (int i = 0; i < 50; i++) {
+        // Créer un panel pour les dessiner
+        bouncersPanel = new BouncersPanel(bouncers);
+
+        // Associer le panel à la fenêtre
+        GraphicalWindow.getInstance().setPanel(bouncersPanel);
+    }
+
+    // Ajoute 'nbBouncers' entités dans la liste d'entités
+    private void createEntities(int width, int height) {
+        for (int i = 0; i < nbBouncers; i++) {
             Entity entity = Math.random() < 0.5 ? new Square() : new Circle();
-            entity.x = (int) (Math.random() * window.getWidth());
-            entity.y = (int) (Math.random() * window.getHeight());
+            entity.x = (int) (Math.random() * width);
+            entity.y = (int) (Math.random() * height);
             bouncers.add(entity);
         }
-
-        window.setEntities(bouncers);
     }
 
     public void run() {
-        // Add entities
-        /*for (int i = 0; i < nbEntities; i++) {
-            Entity entity;
-            if (Math.random() < 0.5)
-                entity = new Square();
-            else
-                entity = new Circle();
-
-            entity.x = (int) (Math.random() * GraphicalWindow.getInstance().getWidth());
-            entity.y = (int) (Math.random() * GraphicalWindow.getInstance().getHeight());
-
-            bouncers.add(entity);
-        }*/
-
-        new Timer(DELAY, new ActionListener() {
+        Timer timer = new Timer(DELAY, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (Entity entity : bouncers) {
                     entity.move();
-                    //entity.draw();
                 }
-                GraphicalWindow.getInstance().repaint();
+                GraphicalWindow.getInstance().getInstance().update(); // Demande un rafraîchissement
             }
-        }).start();
-        //timer.start();
+        });
+        timer.start();
     }
-
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new BouncersApp()::run);
+        SwingUtilities.invokeLater(() -> {
+            new BouncersApp().run();
+        });
     }
-
-    /*@Override
-    public void actionPerformed(ActionEvent e) {
-        for (Entity entity : bouncers) {
-            entity.move();
-            //entity.draw();
-        }
-        GraphicalWindow.getInstance().repaint();
-    }*/
 }

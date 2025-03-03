@@ -1,34 +1,46 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
-public class GraphicalWindow extends JPanel implements Displayer {
-
+/**
+ * @brief Fenêtre graphique pour l'affichage des entités.
+ *
+ * Cette classe implémente les interfaces Displayer et EntityObserver
+ * et utilise le pattern Singleton pour assurer une instance unique.
+ * Elle gère la fenêtre Swing et délègue l'affichage à un JPanel.
+ */
+public class GraphicalWindow implements Displayer, EntityObserver {
+    /* Instance unique (pattern Singleton) */
     private static GraphicalWindow instance;
     private JFrame frame;
     private JPanel panel;
 
-    private final int width = 500;
-    private final int height = 600;
-    private List<Entity> entities;
-
-
     private GraphicalWindow() {
-        // update the board every DELAY ms
         frame = new JFrame("Bouncers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //panel = new JPanel();
-        frame.setSize(width, height);
-        frame.setPreferredSize(new Dimension(width, height));
-        //frame.pack();
-        frame.setContentPane(this);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null); // Center on screen
+
+        // Create a default panel initially
+        panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        frame.setContentPane(panel);
+
         frame.setVisible(true);
+
+        frame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
     }
 
+    /**
+     * @brief Obtient l'instance unique de la fenêtre graphique.
+     * @return L'instance unique de GraphicalWindow
+     */
     public static GraphicalWindow getInstance() {
         if (instance == null) {
             instance = new GraphicalWindow();
@@ -36,40 +48,58 @@ public class GraphicalWindow extends JPanel implements Displayer {
         return instance;
     }
 
+    /**
+     * @brief Définit le panneau d'affichage.
+     * @param newPanel Nouveau panneau à utiliser pour l'affichage
+     */
+    public void setPanel(JPanel newPanel) {
+        this.panel = newPanel;
+        frame.setContentPane(panel);
+        frame.revalidate();
+    }
+
+    @Override
     public int getWidth() {
-        return frame.getWidth();
+        return panel.getWidth();
     }
 
+    @Override
     public int getHeight() {
-        return frame.getHeight();
+        return panel.getHeight();
     }
 
+    /**
+     * @brief Obtient le contexte graphique du panneau.
+     * @return Un objet Graphics2D pour le dessin
+     */
+    @Override
     public Graphics2D getGraphics() {
-        return (Graphics2D) super.getGraphics();
+        return (Graphics2D) panel.getGraphics();
     }
 
+    /**
+     * @brief Demande un rafraîchissement du panneau.
+     */
+    @Override
     public void repaint() {
-        super.repaint();
+        if (panel != null) {
+            panel.repaint();
+        }
     }
 
+    @Override
     public void setTitle(String title) {
         frame.setTitle(title);
     }
 
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        for (Entity entity : entities)
-//            entity.move(this);
-//        repaint();
-//    }
-//
-    public void setEntities(List<Entity> entities) {
-        this.entities = entities;
-    }
+    /**
+     * @brief Méthode de l'interface EntityObserver appelée lors des mises à jour.
+     *
+     * Cette méthode est appelée pour notifier la fenêtre que l'état des entités
+     * a changé et qu'un rafraîchissement est nécessaire.
+     */
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        for (Entity entity : entities)
-            entity.draw(g);
+    public void update() {
+        this.repaint();
     }
 }
