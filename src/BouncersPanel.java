@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -9,13 +10,13 @@ import java.util.List;
  * Elle reçoit une référence à la liste des entités et les dessine lors de l'appel à paintComponent.
  */
 public class BouncersPanel extends JPanel {
-    private final List<Entity> bouncers;
+    private final Collection<Entity> bouncers;
 
     /**
      * @brief Constructeur initialisant le panneau avec la liste des entités.
      * @param bouncers Liste des entités à dessiner
      */
-    public BouncersPanel(List<Entity> bouncers) {
+    public BouncersPanel(Collection<Entity> bouncers) {
         this.bouncers = bouncers;
         setBackground(Color.WHITE);
     }
