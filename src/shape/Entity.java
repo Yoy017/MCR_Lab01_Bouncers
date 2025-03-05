@@ -14,8 +14,8 @@ import java.awt.*;
 abstract public class Entity extends JComponent {
     protected Color color;
     protected int size;
-    public int x;
-    public int y;
+    protected int x;
+    protected int y;
     protected DirectionVector movement;
 
     protected Entity(Color color) {
@@ -43,6 +43,22 @@ abstract public class Entity extends JComponent {
         x += (int) movement.dx;
         if(y <= 0 || y + size >= panelHeight) movement.invertY();
         if(x <= 0 || x + size >= panelWidth) movement.invertX();
+    }
+
+    public int x() {
+        return x;
+    }
+
+    public void x(int x) {
+        this.x = x;
+    }
+
+    public int y() {
+        return y;
+    }
+
+    public void y(int y) {
+        this.y = y;
     }
 
     /**

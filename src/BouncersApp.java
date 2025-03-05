@@ -46,8 +46,8 @@ public class BouncersApp {
     private void createEntities(int width, int height) {
         for (int i = 0; i < nbBouncers; i++) {
             Entity entity = Math.random() < 0.5 ? new SquareFull() : new CircleFull();
-            entity.x = (int) (Math.random() * width);
-            entity.y = (int) (Math.random() * height);
+            entity.x((int) (Math.random() * width));
+            entity.y((int) (Math.random() * height));
             bouncers.add(entity);
         }
     }
