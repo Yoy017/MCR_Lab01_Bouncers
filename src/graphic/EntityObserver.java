@@ -1,3 +1,5 @@
+package graphic;
+
 /**
  * @brief Interface définissant un observateur d'entités.
  *

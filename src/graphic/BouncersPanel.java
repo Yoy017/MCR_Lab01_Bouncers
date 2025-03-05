@@ -1,7 +1,10 @@
+package graphic;
+
+import shape.Entity;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @brief Panneau pour dessiner les entités en mouvement.

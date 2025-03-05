@@ -1,7 +1,9 @@
+package shape;
+
 import java.awt.*;
 
-public class Circle extends Entity {
-    public Circle() {
+public class CircleFull extends Entity {
+    public CircleFull() {
         super(Color.BLUE);
     }
 
@@ -9,7 +11,5 @@ public class Circle extends Entity {
     public void draw(Graphics g) {
         g.setColor(color);
         g.fillOval(x, y, size, size);
-        g.setColor(Color.BLACK);
-        g.drawOval(x, y, size, size);
     }
 }

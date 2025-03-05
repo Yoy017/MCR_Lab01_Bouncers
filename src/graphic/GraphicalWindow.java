@@ -1,11 +1,15 @@
+package graphic;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import shape.*;
+
 /**
  * @brief Fenêtre graphique pour l'affichage des entités.
  *
- * Cette classe implémente les interfaces Displayer et EntityObserver
+ * Cette classe implémente les interfaces graphic.Displayer et graphic.EntityObserver
  * et utilise le pattern Singleton pour assurer une instance unique.
  * Elle gère la fenêtre Swing et délègue l'affichage à un JPanel.
  */
@@ -28,18 +32,18 @@ public class GraphicalWindow implements Displayer, EntityObserver {
 
         frame.setVisible(true);
 
-        frame.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                frame.revalidate();
-                frame.repaint();
-            }
-        });
+//        frame.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                frame.revalidate();
+//                frame.repaint();
+//            }
+//        });
     }
 
     /**
      * @brief Obtient l'instance unique de la fenêtre graphique.
-     * @return L'instance unique de GraphicalWindow
+     * @return L'instance unique de graphic.GraphicalWindow
      */
     public static GraphicalWindow getInstance() {
         if (instance == null) {
@@ -83,7 +87,7 @@ public class GraphicalWindow implements Displayer, EntityObserver {
     @Override
     public void repaint() {
         if (panel != null) {
-            panel.repaint();
+             GraphicalWindow.getInstance().panel.repaint();
         }
     }
 
@@ -93,7 +97,7 @@ public class GraphicalWindow implements Displayer, EntityObserver {
     }
 
     /**
-     * @brief Méthode de l'interface EntityObserver appelée lors des mises à jour.
+     * @brief Méthode de l'interface graphic.EntityObserver appelée lors des mises à jour.
      *
      * Cette méthode est appelée pour notifier la fenêtre que l'état des entités
      * a changé et qu'un rafraîchissement est nécessaire.

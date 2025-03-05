@@ -1,3 +1,7 @@
+package shape;
+
+import graphic.GraphicalWindow;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +13,9 @@ import java.awt.*;
  */
 abstract public class Entity extends JComponent {
     protected Color color;
-    protected int size, x, y;
+    protected int size;
+    public int x;
+    public int y;
     protected DirectionVector movement;
 
     protected Entity(Color color) {

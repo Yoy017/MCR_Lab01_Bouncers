@@ -1,3 +1,5 @@
+package graphic;
+
 import java.awt.*;
 
 public interface Displayer {

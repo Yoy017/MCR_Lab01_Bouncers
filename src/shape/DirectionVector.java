@@ -1,3 +1,5 @@
+package shape;
+
 import java.util.Random;
 
 public class DirectionVector {
@@ -19,7 +21,7 @@ public class DirectionVector {
             angle = random.nextDouble() * 2 * Math.PI;
         } while(Math.abs(Math.cos(angle)) < 0.5 || Math.abs(Math.sin(angle)) < 0.5);
 
-        return new DirectionVector(speed * Math.cos(angle), speed * Math.sin(angle));*/
+        return new shape.DirectionVector(speed * Math.cos(angle), speed * Math.sin(angle));*/
         double speedX = (random.nextDouble() * (maxSpeed - minSpeed)) + minSpeed;
         double speedY = (random.nextDouble() * (maxSpeed - minSpeed)) + minSpeed;
 
