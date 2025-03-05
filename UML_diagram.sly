@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
+<classDiagram>
+  <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="Bouncers">
+    <dependency id="18315" label="integrate">
+      <source>18011</source>
+      <target>18013</target>
+    </dependency>
+    <entity entityType="CLASS" id="18013" isAbstract="false" name="BouncersPanel" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="18012" isAbstract="false" name="GraphicalWindow" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="18011" isAbstract="false" name="BouncersApp" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="bouncers" type="LinkedList&lt;Bouncable&gt;" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="true" name="DELAY" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="true" name="nbBouncers" type="int" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="createEntities" returnType="void" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="width" type="int"/>
+        <variable const="false" name="heigth" type="int"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="run" returnType="void" view="DEFAULT" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="main" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="arg" type="String[]"/>
+      </method>
+    </entity>
+  </diagramElements>
+  <umlView grid="10" name="Main view" open="true">
+    <relationView color="-12566464" relationId="18315">
+      <line>
+        <point>
+          <x>421</x>
+          <y>91</y>
+        </point>
+        <point>
+          <x>581</x>
+          <y>91</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>473</x>
+        <y>99</y>
+        <w>59</w>
+        <h>16</h>
+      </labelAssociation>
+    </relationView>
+    <componentView color="-2079" componentID="18011" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>200</x>
+        <y>30</y>
+        <w>220</w>
+        <h>145</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="18012" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>290</x>
+        <y>350</y>
+        <w>150</w>
+        <h>55</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="18013" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>580</x>
+        <y>60</y>
+        <w>150</w>
+        <h>55</h>
+      </geometry>
+    </componentView>
+  </umlView>
+</classDiagram>
