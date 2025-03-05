@@ -51,7 +51,7 @@ public class BouncersApp {
                 for (Entity entity : bouncers) {
                     entity.move();
                 }
-                GraphicalWindow.getInstance().getInstance().update(); // Demande un rafraîchissement
+                GraphicalWindow.getInstance().update(); // Demande un rafraîchissement
             }
         });
         timer.start();
