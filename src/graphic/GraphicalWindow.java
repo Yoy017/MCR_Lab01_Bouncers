@@ -106,4 +106,8 @@ public class GraphicalWindow implements Displayer, EntityObserver {
     public void update() {
         this.repaint();
     }
+
+    public void addKeyListenerToFrame(KeyListener listener) {
+        frame.addKeyListener(listener);
+    }
 }

@@ -38,6 +38,8 @@ public class BouncersApp {
         // Associer le panel à la fenêtre
         GraphicalWindow.getInstance().setPanel(bouncersPanel);
 
+        // Ajoute un KeyListener pour gérer les touches
+        GraphicalWindow.getInstance().addKeyListenerToFrame(new BouncersKeyListener());
     }
 
     // Ajoute 'nbBouncers' entités dans la liste d'entités
@@ -90,4 +92,5 @@ public class BouncersApp {
         }
 
     }
+
 }
