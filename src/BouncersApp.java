@@ -1,10 +1,11 @@
 import graphic.BouncersPanel;
 import graphic.GraphicalWindow;
 import shape.*;
+import shape.circle.CircleFull;
+import shape.square.SquareFull;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.LinkedList;
 
 /**
@@ -36,12 +37,13 @@ public class BouncersApp {
 
         // Associer le panel à la fenêtre
         GraphicalWindow.getInstance().setPanel(bouncersPanel);
+
     }
 
     // Ajoute 'nbBouncers' entités dans la liste d'entités
     private void createEntities(int width, int height) {
         for (int i = 0; i < nbBouncers; i++) {
-            Entity entity = Math.random() < 0.5 ? new SquareBorder() : new CircleBorder();
+            Entity entity = Math.random() < 0.5 ? new SquareFull() : new CircleFull();
             entity.x = (int) (Math.random() * width);
             entity.y = (int) (Math.random() * height);
             bouncers.add(entity);
@@ -65,5 +67,27 @@ public class BouncersApp {
         SwingUtilities.invokeLater(() -> {
             new BouncersApp().run();
         });
+    }
+
+    private static class BouncersKeyListener extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_E:
+                    System.out.println("E");
+                    break;
+                case KeyEvent.VK_F:
+
+                    break;
+                case KeyEvent.VK_B:
+
+                    break;
+                case KeyEvent.VK_Q:
+
+                    break;
+            }
+        }
+
     }
 }

@@ -1,10 +1,12 @@
-package shape;
+package shape.square;
+
+import shape.Entity;
 
 import java.awt.*;
 
 public class SquareFull extends Entity {
     public SquareFull() {
-        super(Color.YELLOW);
+        super(Color.ORANGE);
     }
 
     @Override

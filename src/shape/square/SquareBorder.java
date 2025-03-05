@@ -1,4 +1,6 @@
-package shape;
+package shape.square;
+
+import shape.Entity;
 
 import java.awt.*;
 
