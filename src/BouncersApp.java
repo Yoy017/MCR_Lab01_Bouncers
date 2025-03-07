@@ -1,10 +1,9 @@
-import graphic.BouncersPanel;
+import factory.FactoryAbstractShape;
+import graphic.DefaultRenderer;
 import graphic.GraphicalWindow;
+import graphic.Renderer;
 import shape.*;
-import shape.circle.CircleBorder;
-import shape.circle.CircleFull;
-import shape.square.SquareBorder;
-import shape.square.SquareFull;
+import factory.*;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -19,47 +18,64 @@ import java.util.LinkedList;
  */
 public class BouncersApp {
     /** Liste des entités animées */
-    private final LinkedList<Entity> bouncers = new LinkedList<>();
+    private final LinkedList<Bouncable> bouncers = new LinkedList<>();
 
     /** Délai entre les mises à jour en millisecondes */
     private static final int DELAY = 20;
 
     /** Nombre d'entités à créer */
-    private static final int nbBouncers = 50;
+    private static final int ADD_ENTITIES = 10;
 
-    /** Panneau personnalisé pour le dessin des entités */
-    private final BouncersPanel bouncersPanel;
+    private final FactoryAbstractShape factoryFull;
+    private final FactoryAbstractShape factoryBorder;
+
+    private Timer timer;
 
     public BouncersApp() {
         // Créer les entités
-        createEntities(800, 600); // Dimensions initiales par défaut
-
-        // Créer un panel pour les dessiner
-        bouncersPanel = new BouncersPanel(bouncers);
-
-        // Associer le panel à la fenêtre
-        GraphicalWindow.getInstance().setPanel(bouncersPanel);
-
+        Renderer renderer = new DefaultRenderer(true);
+        factoryFull = new FactoryFull();
+        factoryBorder = new FactoryBorder();
         // Ajoute un KeyListener pour gérer les touches
         GraphicalWindow.getInstance().addKeyListenerToFrame(new BouncersKeyListener());
     }
 
-    // Ajoute 'nbBouncers' entités dans la liste d'entités
-    private void createEntities(int width, int height) {
-        for (int i = 0; i < nbBouncers; i++) {
-            Entity entity = Math.random() < 0.5 ? new SquareBorder() : new CircleBorder();
-            entity.x((int) (Math.random() * width));
-            entity.y((int) (Math.random() * height));
-            bouncers.add(entity);
+    // Ajouter des entités à la liste
+    private void createFullShape() {
+        for (int i = 0; i < ADD_ENTITIES; i++) {
+            Renderer rendererFull = new DefaultRenderer(true);
+            bouncers.add(factoryFull.createCircle(rendererFull));
+            bouncers.add(factoryFull.createSquare(rendererFull));
         }
     }
 
+    private void createBorderShape() {
+        for (int i = 0; i < ADD_ENTITIES; i++) {
+            Renderer rendererBorder = new DefaultRenderer(false);
+            bouncers.add(factoryBorder.createCircle(rendererBorder));
+            bouncers.add(factoryBorder.createSquare(rendererBorder));
+        }
+    }
+
+    private void clearShapes() {
+        bouncers.clear();
+        GraphicalWindow.getInstance().update();
+    }
+
+    private void stop() {
+        if (timer != null) {
+            timer.stop();
+        }
+        System.exit(0);
+    }
+
     public void run() {
-        Timer timer = new Timer(DELAY, new ActionListener() {
+        timer = new Timer(DELAY, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Entity entity : bouncers) {
-                    entity.move();
+                for (Bouncable b : bouncers) {
+                    b.move();
+                    b.draw();
                 }
                 GraphicalWindow.getInstance().update(); // Demande un rafraîchissement
             }
@@ -68,31 +84,27 @@ public class BouncersApp {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
             new BouncersApp().run();
-        });
     }
 
-    private static class BouncersKeyListener extends KeyAdapter {
+    private class BouncersKeyListener extends KeyAdapter {
 
         @Override
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_E:
-                    System.out.println("E");
+                    clearShapes();
                     break;
                 case KeyEvent.VK_F:
-
+                    createFullShape();
                     break;
                 case KeyEvent.VK_B:
-
+                    createBorderShape();
                     break;
                 case KeyEvent.VK_Q:
-                    System.exit(0);
+                    stop();
                     break;
             }
         }
-
     }
-
 }

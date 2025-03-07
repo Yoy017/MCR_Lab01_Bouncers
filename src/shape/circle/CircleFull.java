@@ -1,17 +1,19 @@
 package shape.circle;
 
-import shape.Entity;
+import shape.AbstractShape;
+import graphic.Renderer;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
-public class CircleFull extends Entity {
-    public CircleFull() {
-        super(Color.BLUE);
+public class CircleFull extends AbstractShape {
+
+    public CircleFull(Renderer renderer) {
+        super(Color.BLUE, renderer);
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        g.setColor(color);
-        g.fillOval(x, y, size, size);
+    public Shape getShape() {
+        return new Ellipse2D.Double(x, y, size, size);
     }
 }

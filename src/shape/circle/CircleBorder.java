@@ -1,18 +1,18 @@
 package shape.circle;
 
-import shape.Entity;
+import shape.AbstractShape;
+import graphic.Renderer;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
-public class CircleBorder extends Entity {
-    public CircleBorder() {
-        super(Color.GREEN);
+public class CircleBorder extends AbstractShape {
+    public CircleBorder(Renderer renderer) {
+        super(Color.GREEN, renderer);
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        g.setColor(color);
-        g.setStroke(new BasicStroke(2));
-        g.drawOval(x, y, size, size);
+    public Shape getShape() {
+        return new Ellipse2D.Double(x, y, size, size);
     }
 }

@@ -1,17 +1,18 @@
 package shape.square;
 
-import shape.Entity;
+import shape.AbstractShape;
+import graphic.Renderer;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
-public class SquareFull extends Entity {
-    public SquareFull() {
-        super(Color.ORANGE);
+public class SquareFull extends AbstractShape {
+    public SquareFull(Renderer renderer) {
+        super(Color.ORANGE, renderer);
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        g.setColor(color);
-        g.fillRect(x, y, size, size);
+    public Shape getShape() {
+        return new Rectangle2D.Double(x, y, size, size);
     }
 }

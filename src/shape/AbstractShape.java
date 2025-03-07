@@ -1,6 +1,7 @@
 package shape;
 
 import graphic.GraphicalWindow;
+import graphic.Renderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,19 +12,21 @@ import java.awt.*;
  * Cette classe définit le comportement de base d'une entité qui peut
  * se déplacer dans une fenêtre et rebondir sur les bords.
  */
-abstract public class Entity extends JComponent {
+abstract public class AbstractShape implements Bouncable {
     protected Color color;
     protected int size;
     protected int x;
     protected int y;
     protected DirectionVector movement;
+    protected Renderer renderer;
 
-    protected Entity(Color color) {
+    protected AbstractShape(Color color, Renderer renderer) {
         this.color = color;
+        this.renderer = renderer;
         this.size = (int) (Math.random() * 5) + 15; // random size between 5 and 20 px
         // initial position
-        this.x = 0;
-        this.y = 0;
+        this.x = (int) (Math.random() * GraphicalWindow.getInstance().getWidth());;
+        this.y = (int) (Math.random() * GraphicalWindow.getInstance().getHeight());;
         // vector of movement
         this.movement = DirectionVector.randomDirection(1, 5);
     }
@@ -45,25 +48,16 @@ abstract public class Entity extends JComponent {
         if(x <= 0 || x + size >= panelWidth) movement.invertX();
     }
 
-    public int x() {
-        return x;
-    }
-
-    public void x(int x) {
-        this.x = x;
-    }
-
-    public int y() {
-        return y;
-    }
-
-    public void y(int y) {
-        this.y = y;
-    }
-
     /**
      * @brief Dessine l'entité sur le contexte graphique fourni.
-     * @param g Contexte graphique sur lequel dessiner
      */
-    public abstract void draw(Graphics2D g);
+    @Override
+    public void draw() {
+        renderer.display(GraphicalWindow.getInstance().getGraphics(), this);
+    };
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
 }

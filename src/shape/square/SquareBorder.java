@@ -1,18 +1,18 @@
 package shape.square;
 
-import shape.Entity;
+import shape.AbstractShape;
+import graphic.Renderer;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
-public class SquareBorder extends Entity {
-    public SquareBorder() {
-        super(Color.RED);
+public class SquareBorder extends AbstractShape {
+    public SquareBorder(Renderer renderer) {
+        super(Color.RED, renderer);
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        g.setColor(color);
-        g.setStroke(new BasicStroke(2));
-        g.drawRect(x, y, size, size);
+    public Shape getShape() {
+        return new Rectangle2D.Double(x, y, size, size);
     }
 }

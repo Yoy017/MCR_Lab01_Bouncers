@@ -12,16 +12,6 @@ public class DirectionVector {
     }
 
     public static DirectionVector randomDirection(double minSpeed, double maxSpeed) {
-        /*// random speed between minSpeed and maxSpeed
-        double speed = minSpeed + (random.nextDouble() * (maxSpeed - minSpeed));
-        // random angle between 0 and 2PI
-        //double angle = random.nextDouble() * 2 * Math.PI;
-        double angle;
-        do {
-            angle = random.nextDouble() * 2 * Math.PI;
-        } while(Math.abs(Math.cos(angle)) < 0.5 || Math.abs(Math.sin(angle)) < 0.5);
-
-        return new shape.DirectionVector(speed * Math.cos(angle), speed * Math.sin(angle));*/
         double speedX = (random.nextDouble() * (maxSpeed - minSpeed)) + minSpeed;
         double speedY = (random.nextDouble() * (maxSpeed - minSpeed)) + minSpeed;
 
