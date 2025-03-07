@@ -10,7 +10,7 @@ public class CircleFull extends Entity {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(color);
         g.fillOval(x, y, size, size);
     }

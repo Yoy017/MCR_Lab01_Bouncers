@@ -10,8 +10,9 @@ public class SquareBorder extends Entity {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.setColor(color);
-        g.fillRect(x, y, size, size);
+        g.setStroke(new BasicStroke(2));
+        g.drawRect(x, y, size, size);
     }
 }

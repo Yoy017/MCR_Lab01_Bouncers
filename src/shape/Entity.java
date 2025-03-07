@@ -65,5 +65,5 @@ abstract public class Entity extends JComponent {
      * @brief Dessine l'entité sur le contexte graphique fourni.
      * @param g Contexte graphique sur lequel dessiner
      */
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics2D g);
 }

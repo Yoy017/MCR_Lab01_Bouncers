@@ -1,7 +1,9 @@
 import graphic.BouncersPanel;
 import graphic.GraphicalWindow;
 import shape.*;
+import shape.circle.CircleBorder;
 import shape.circle.CircleFull;
+import shape.square.SquareBorder;
 import shape.square.SquareFull;
 
 import javax.swing.*;
@@ -45,7 +47,7 @@ public class BouncersApp {
     // Ajoute 'nbBouncers' entités dans la liste d'entités
     private void createEntities(int width, int height) {
         for (int i = 0; i < nbBouncers; i++) {
-            Entity entity = Math.random() < 0.5 ? new SquareFull() : new CircleFull();
+            Entity entity = Math.random() < 0.5 ? new SquareBorder() : new CircleBorder();
             entity.x((int) (Math.random() * width));
             entity.y((int) (Math.random() * height));
             bouncers.add(entity);
@@ -86,7 +88,7 @@ public class BouncersApp {
 
                     break;
                 case KeyEvent.VK_Q:
-
+                    System.exit(0);
                     break;
             }
         }
