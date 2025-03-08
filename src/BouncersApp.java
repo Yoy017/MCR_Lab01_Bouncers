@@ -21,7 +21,7 @@ public class BouncersApp {
     private final LinkedList<Bouncable> bouncers = new LinkedList<>();
 
     /** Délai entre les mises à jour en millisecondes */
-    private static final int DELAY = 20;
+    private static final int DELAY = 33;
 
     /** Nombre d'entités à créer */
     private static final int ADD_ENTITIES = 10;
@@ -33,7 +33,7 @@ public class BouncersApp {
 
     public BouncersApp() {
         // Créer les entités
-        Renderer renderer = new DefaultRenderer(true);
+        //Renderer renderer = new DefaultRenderer(true);
         factoryFull = new FactoryFull();
         factoryBorder = new FactoryBorder();
         // Ajoute un KeyListener pour gérer les touches
@@ -73,18 +73,32 @@ public class BouncersApp {
         timer = new Timer(DELAY, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Bouncable b : bouncers) {
-                    b.move();
-                    b.draw();
-                }
-                GraphicalWindow.getInstance().update(); // Demande un rafraîchissement
+               updateAndRenderShapes();
             }
         });
         timer.start();
     }
 
+    private void updateAndRenderShapes() {
+        for (Bouncable b : bouncers) {
+            b.move();
+        }
+
+        GraphicalWindow window = GraphicalWindow.getInstance();
+        window.clearBuffer();
+
+        for (Bouncable b : bouncers) {
+            b.draw();
+        }
+        
+        window.update(); // Demande un rafraîchissement
+    }
+
     public static void main(String[] args) {
-            new BouncersApp().run();
+        SwingUtilities.invokeLater(() -> {
+            BouncersApp app = new BouncersApp();
+            app.run();
+        });
     }
 
     private class BouncersKeyListener extends KeyAdapter {

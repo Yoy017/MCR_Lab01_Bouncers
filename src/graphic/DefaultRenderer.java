@@ -14,6 +14,10 @@ public class DefaultRenderer implements Renderer {
     public void display(Graphics2D g, Bouncable b) {
         if (g != null) {
             g.setColor(b.getColor());
+
+            // antialiasing
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
             if(isFilled)
                 g.fill(b.getShape());
             else {

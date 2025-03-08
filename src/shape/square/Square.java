@@ -1,4 +1,4 @@
-package shape.square;
+/*package shape.square;
 
 public class Square {
-}
+}*/

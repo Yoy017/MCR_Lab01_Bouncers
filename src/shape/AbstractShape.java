@@ -24,9 +24,17 @@ abstract public class AbstractShape implements Bouncable {
         this.color = color;
         this.renderer = renderer;
         this.size = (int) (Math.random() * 5) + 15; // random size between 5 and 20 px
-        // initial position
-        this.x = (int) (Math.random() * GraphicalWindow.getInstance().getWidth());;
-        this.y = (int) (Math.random() * GraphicalWindow.getInstance().getHeight());;
+        // random initial position
+        GraphicalWindow window = GraphicalWindow.getInstance();
+        int maxWidth = window.getWidth() - size;
+        int maxHeight = window.getHeight() - size;
+        // positive size
+        maxWidth = Math.max(1, maxWidth);
+        maxHeight = Math.max(1, maxHeight);
+
+        this.x = (int) (Math.random() * maxWidth);
+        this.y = (int) (Math.random() * maxHeight);
+
         // vector of movement
         this.movement = DirectionVector.randomDirection(1, 5);
     }
@@ -44,8 +52,23 @@ abstract public class AbstractShape implements Bouncable {
 
         y += (int) movement.dy;
         x += (int) movement.dx;
-        if(y <= 0 || y + size >= panelHeight) movement.invertY();
-        if(x <= 0 || x + size >= panelWidth) movement.invertX();
+
+        // longer check but more efficient
+        if (y <= 0) {
+            y = 0;
+            movement.invertY();
+        } else if (y + size >= panelHeight) {
+            y = panelHeight - size;
+            movement.invertY();
+        }
+
+        if (x <= 0) {
+            x = 0;
+            movement.invertX();
+        } else if (x + size >= panelWidth) {
+            x = panelWidth - size;
+            movement.invertX();
+        }
     }
 
     /**

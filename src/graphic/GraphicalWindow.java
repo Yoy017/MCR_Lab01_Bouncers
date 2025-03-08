@@ -19,6 +19,7 @@ public class GraphicalWindow implements Displayer, EntityObserver {
     private JFrame frame;
     private JPanel panel;
     private Image buffer;
+    private Graphics2D g2Buffer;
 
     private GraphicalWindow() {
         frame = new JFrame("Bouncers");
@@ -51,14 +52,23 @@ public class GraphicalWindow implements Displayer, EntityObserver {
         frame.setContentPane(panel);
         frame.setVisible(true);
 
+        buffer = createNewBuffer();
+
         frame.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                buffer = panel.createImage(panel.getWidth(), panel.getHeight());
-                frame.revalidate();
-                frame.repaint();
+                buffer = createNewBuffer();
             }
         });
+    }
+
+    private Image createNewBuffer() {
+        Image newBuffer = panel.createImage(panel.getWidth(), panel.getHeight());
+        if (newBuffer != null) {
+            g2Buffer = (Graphics2D) newBuffer.getGraphics();
+            g2Buffer.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        }
+        return newBuffer;
     }
 
     /**
@@ -70,17 +80,6 @@ public class GraphicalWindow implements Displayer, EntityObserver {
             instance = new GraphicalWindow();
         }
         return instance;
-    }
-
-    /**
-     * @brief Définit le panneau d'affichage.
-     * @param newPanel Nouveau panneau à utiliser pour l'affichage
-     */
-    public void setPanel(JPanel newPanel) {
-        this.panel = newPanel;
-        frame.setContentPane(panel);
-        buffer = panel.createImage(panel.getWidth(), panel.getHeight());
-        frame.revalidate();
     }
 
     @Override
@@ -99,14 +98,18 @@ public class GraphicalWindow implements Displayer, EntityObserver {
      */
     @Override
     public Graphics2D getGraphics() {
-        if(buffer == null) {
-            buffer = panel.createImage(panel.getWidth(), panel.getHeight());
+        if(buffer == null || g2Buffer == null) {
+            buffer = createNewBuffer();
         }
-        Graphics2D g2 = (Graphics2D) buffer.getGraphics();
-        g2.setColor(Color.WHITE);
-        g2.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        return (Graphics2D) panel.getGraphics();
+
+        return g2Buffer;
+    }
+
+    public void clearBuffer() {
+        if (g2Buffer != null) {
+            g2Buffer.setColor(Color.WHITE);
+            g2Buffer.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+        }
     }
 
     /**
@@ -115,7 +118,7 @@ public class GraphicalWindow implements Displayer, EntityObserver {
     @Override
     public void repaint() {
         if (panel != null) {
-             GraphicalWindow.getInstance().panel.repaint();
+             panel.repaint();
         }
     }
 
