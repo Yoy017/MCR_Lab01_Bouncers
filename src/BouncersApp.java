@@ -95,10 +95,7 @@ public class BouncersApp {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            BouncersApp app = new BouncersApp();
-            app.run();
-        });
+        new BouncersApp().run();
     }
 
     private class BouncersKeyListener extends KeyAdapter {

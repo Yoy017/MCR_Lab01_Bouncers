@@ -3,7 +3,6 @@ package shape;
 import graphic.GraphicalWindow;
 import graphic.Renderer;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -50,24 +49,24 @@ abstract public class AbstractShape implements Bouncable {
         int panelWidth = panel.getWidth();
         int panelHeight = panel.getHeight();
 
-        y += (int) movement.dy;
-        x += (int) movement.dx;
+        y += (int) movement.getY();
+        x += (int) movement.getX();
 
         // longer check but more efficient
         if (y <= 0) {
             y = 0;
-            movement.invertY();
+            movement.setY(-movement.getY());
         } else if (y + size >= panelHeight) {
             y = panelHeight - size;
-            movement.invertY();
+            movement.setY(-movement.getY());
         }
 
         if (x <= 0) {
             x = 0;
-            movement.invertX();
+            movement.setX(-movement.getX());
         } else if (x + size >= panelWidth) {
             x = panelWidth - size;
-            movement.invertX();
+            movement.setX(-movement.getX());
         }
     }
 

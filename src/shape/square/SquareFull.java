@@ -1,7 +1,7 @@
 package shape.square;
 
-import shape.AbstractShape;
 import graphic.Renderer;
+import shape.AbstractShape;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
