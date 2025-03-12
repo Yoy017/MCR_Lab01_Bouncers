@@ -6,15 +6,22 @@ import java.awt.*;
 
 public class RendererFull implements Renderer {
 
+    private static RendererFull instance;
+
     private RendererFull() {
     }
 
-    private static class InstanceHolder {
-        private static final RendererFull instance = new RendererFull();
-    }
+//    private static class InstanceHolder {
+//        private static final RendererFull instance = new RendererFull();
+//    }
 
     public static RendererFull getInstance() {
-        return InstanceHolder.instance;
+
+        if(instance == null) {
+            instance = new RendererFull();
+        }
+
+        return instance;
     }
 
     @Override

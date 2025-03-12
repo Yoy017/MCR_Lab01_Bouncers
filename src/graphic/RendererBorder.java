@@ -5,15 +5,17 @@ import java.awt.*;
 
 public class RendererBorder implements Renderer {
 
+    private static RendererBorder instance;
+
     public RendererBorder() {
     }
 
-    private static class InstanceHolder {
-        private static final RendererBorder instance = new RendererBorder();
-    }
-
     public static RendererBorder getInstance() {
-        return InstanceHolder.instance;
+        if(instance == null) {
+            instance = new RendererBorder();
+        }
+
+        return instance;
     }
 
     @Override
