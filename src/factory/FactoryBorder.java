@@ -1,18 +1,29 @@
 package factory;
 
-import graphic.Renderer;
 import shape.Bouncable;
 import shape.circle.CircleBorder;
-import shape.square.SquareBorder;
+import shape.circle.SquareBorder;
 
 public class FactoryBorder implements FactoryAbstractShape {
-    @Override
-    public Bouncable createCircle(Renderer renderer) {
-        return new CircleBorder(renderer);
+    private static FactoryBorder instance;
+
+    private FactoryBorder() {
+    }
+
+    public static FactoryBorder getInstance() {
+        if (instance == null) {
+            instance = new FactoryBorder();
+        }
+        return instance;
     }
 
     @Override
-    public Bouncable createSquare(Renderer renderer) {
-        return new SquareBorder(renderer);
+    public Bouncable createCircle() {
+        return new CircleBorder();
+    }
+
+    @Override
+    public Bouncable createSquare() {
+        return new SquareBorder();
     }
 }

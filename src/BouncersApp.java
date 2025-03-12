@@ -1,7 +1,5 @@
 import factory.FactoryAbstractShape;
-import graphic.DefaultRenderer;
 import graphic.GraphicalWindow;
-import graphic.Renderer;
 import shape.*;
 import factory.*;
 
@@ -26,40 +24,26 @@ public class BouncersApp {
     /** Nombre d'entités à créer */
     private static final int ADD_ENTITIES = 10;
 
-    private final FactoryAbstractShape factoryFull;
-    private final FactoryAbstractShape factoryBorder;
-
     private Timer timer;
 
     public BouncersApp() {
-        // Créer les entités
-        //Renderer renderer = new DefaultRenderer(true);
-        factoryFull = new FactoryFull();
-        factoryBorder = new FactoryBorder();
         // Ajoute un KeyListener pour gérer les touches
-        GraphicalWindow.getInstance().addKeyListenerToFrame(new BouncersKeyListener());
+        GraphicalWindow window = GraphicalWindow.getInstance();
+        window.setTitle("Bouncers");
+        window.addKeyListenerToFrame(new BouncersKeyListener());
     }
 
     // Ajouter des entités à la liste
-    private void createFullShape() {
+    private void createShapes(FactoryAbstractShape factory) {
         for (int i = 0; i < ADD_ENTITIES; i++) {
-            Renderer rendererFull = new DefaultRenderer(true);
-            bouncers.add(factoryFull.createCircle(rendererFull));
-            bouncers.add(factoryFull.createSquare(rendererFull));
-        }
-    }
-
-    private void createBorderShape() {
-        for (int i = 0; i < ADD_ENTITIES; i++) {
-            Renderer rendererBorder = new DefaultRenderer(false);
-            bouncers.add(factoryBorder.createCircle(rendererBorder));
-            bouncers.add(factoryBorder.createSquare(rendererBorder));
+            bouncers.add(factory.createCircle());
+            bouncers.add(factory.createSquare());
         }
     }
 
     private void clearShapes() {
         bouncers.clear();
-        GraphicalWindow.getInstance().update();
+        GraphicalWindow.getInstance().repaint();
     }
 
     private void stop() {
@@ -91,7 +75,7 @@ public class BouncersApp {
             b.draw();
         }
         
-        window.update(); // Demande un rafraîchissement
+        window.repaint(); // Demande un rafraîchissement
     }
 
     public static void main(String[] args) {
@@ -107,10 +91,10 @@ public class BouncersApp {
                     clearShapes();
                     break;
                 case KeyEvent.VK_F:
-                    createFullShape();
+                    createShapes(FactoryFull.getInstance());
                     break;
                 case KeyEvent.VK_B:
-                    createBorderShape();
+                    createShapes(FactoryBorder.getInstance());
                     break;
                 case KeyEvent.VK_Q:
                     stop();

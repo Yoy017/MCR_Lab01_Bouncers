@@ -4,6 +4,6 @@ import graphic.Renderer;
 import shape.Bouncable;
 
 public interface FactoryAbstractShape {
-    Bouncable createCircle(Renderer renderer);
-    Bouncable createSquare(Renderer renderer);
+    Bouncable createSquare();
+    Bouncable createCircle();
 }

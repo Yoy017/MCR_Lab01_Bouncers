@@ -1,14 +1,13 @@
-package shape.square;
+package shape.circle;
 
-import graphic.Renderer;
 import shape.AbstractShape;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public class SquareFull extends AbstractShape {
-    public SquareFull(Renderer renderer) {
-        super(Color.ORANGE, renderer);
+public abstract class Square extends AbstractShape {
+    public Square(Color color) {
+        super(color);
     }
 
     @Override

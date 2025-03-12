@@ -1,18 +1,29 @@
 package factory;
 
-import graphic.Renderer;
 import shape.Bouncable;
 import shape.circle.CircleFull;
-import shape.square.SquareFull;
+import shape.circle.SquareFull;
 
 public class FactoryFull implements FactoryAbstractShape {
-    @Override
-    public Bouncable createCircle(Renderer renderer) {
-        return new CircleFull(renderer);
+    private static FactoryFull instance;
+
+    private FactoryFull() {
+    }
+
+    public static FactoryFull getInstance() {
+        if (instance == null) {
+            instance = new FactoryFull();
+        }
+        return instance;
     }
 
     @Override
-    public Bouncable createSquare(Renderer renderer) {
-        return new SquareFull(renderer);
+    public Bouncable createCircle() {
+        return new CircleFull();
+    }
+
+    @Override
+    public Bouncable createSquare() {
+        return new SquareFull();
     }
 }

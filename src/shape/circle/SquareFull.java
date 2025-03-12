@@ -1,16 +1,15 @@
 package shape.circle;
 
+import graphic.Renderer;
 import graphic.RendererFull;
 import shape.AbstractShape;
-import graphic.Renderer;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
-public class CircleFull extends Circle {
-
-    public CircleFull() {
-        super(Color.BLUE);
+public class SquareFull extends Square {
+    public SquareFull() {
+        super(Color.ORANGE);
     }
 
     protected Renderer getRenderer() {

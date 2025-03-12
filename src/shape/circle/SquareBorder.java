@@ -4,10 +4,11 @@ import graphic.Renderer;
 import graphic.RendererBorder;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
-public class CircleBorder extends Circle {
-    public CircleBorder() {
-        super(Color.GREEN);
+public class SquareBorder extends Square {
+    public SquareBorder() {
+        super(Color.RED);
     }
 
     @Override

@@ -13,7 +13,7 @@ import shape.*;
  * et utilise le pattern Singleton pour assurer une instance unique.
  * Elle gère la fenêtre Swing et délègue l'affichage à un JPanel.
  */
-public class GraphicalWindow implements Displayer, EntityObserver {
+public class GraphicalWindow implements Displayer {
     /* Instance unique (pattern Singleton) */
     private static GraphicalWindow instance;
     private JFrame frame;
@@ -125,17 +125,6 @@ public class GraphicalWindow implements Displayer, EntityObserver {
     @Override
     public void setTitle(String title) {
         frame.setTitle(title);
-    }
-
-    /**
-     * @brief Méthode de l'interface graphic.EntityObserver appelée lors des mises à jour.
-     *
-     * Cette méthode est appelée pour notifier la fenêtre que l'état des entités
-     * a changé et qu'un rafraîchissement est nécessaire.
-     */
-    @Override
-    public void update() {
-        this.repaint();
     }
 
     public void addKeyListenerToFrame(KeyListener listener) {

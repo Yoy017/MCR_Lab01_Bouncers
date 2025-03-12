@@ -17,11 +17,10 @@ abstract public class AbstractShape implements Bouncable {
     protected int x;
     protected int y;
     protected DirectionVector movement;
-    protected Renderer renderer;
+//    protected Renderer renderer;
 
-    protected AbstractShape(Color color, Renderer renderer) {
+    protected AbstractShape(Color color) {
         this.color = color;
-        this.renderer = renderer;
         this.size = (int) (Math.random() * 5) + 15; // random size between 5 and 20 px
         // random initial position
         GraphicalWindow window = GraphicalWindow.getInstance();
@@ -70,12 +69,14 @@ abstract public class AbstractShape implements Bouncable {
         }
     }
 
+    protected abstract Renderer getRenderer();
+
     /**
      * @brief Dessine l'entité sur le contexte graphique fourni.
      */
     @Override
-    public void draw() {
-        renderer.display(GraphicalWindow.getInstance().getGraphics(), this);
+    public void draw()  {
+         getRenderer().display(GraphicalWindow.getInstance().getGraphics(), this);
     };
 
     @Override
