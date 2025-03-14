@@ -1,15 +1,24 @@
+/**
+ * FactoryBorder.java
+ * @authors Bleuer Rémy, Changanaqui Yoann
+ * 14.03.25
+ * MCR-A
+ */
+
 package factory;
 
 import shape.Bouncable;
 import shape.circle.CircleBorder;
-import shape.circle.SquareBorder;
+import shape.square.SquareBorder;
 
+/**
+ * @brief FactoryBorder class to create a square and a circle with a border.
+ */
 public class FactoryBorder implements FactoryAbstractShape {
+    // singleton
     private static FactoryBorder instance;
 
-    private FactoryBorder() {
-    }
-
+    // new instance if not already created
     public static FactoryBorder getInstance() {
         if (instance == null) {
             instance = new FactoryBorder();

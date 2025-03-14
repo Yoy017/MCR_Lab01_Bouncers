@@ -1,15 +1,24 @@
+/**
+ * FactoryFull.java
+ * @authors Bleuer Rémy, Changanaqui Yoann
+ * 14.03.25
+ * MCR-A
+ */
+
 package factory;
 
 import shape.Bouncable;
 import shape.circle.CircleFull;
-import shape.circle.SquareFull;
+import shape.square.SquareFull;
 
+/**
+ * @brief FactoryFull class to create a square and a circle with a full color.
+ */
 public class FactoryFull implements FactoryAbstractShape {
+    // singleton
     private static FactoryFull instance;
 
-    private FactoryFull() {
-    }
-
+    // new instance if not already created
     public static FactoryFull getInstance() {
         if (instance == null) {
             instance = new FactoryFull();
