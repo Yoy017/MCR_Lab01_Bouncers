@@ -26,6 +26,8 @@ public class FactoryFull implements FactoryAbstractShape {
         return instance;
     }
 
+    private FactoryFull() { }
+
     @Override
     public Bouncable createCircle() {
         return new CircleFull();

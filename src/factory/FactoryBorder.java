@@ -26,6 +26,8 @@ public class FactoryBorder implements FactoryAbstractShape {
         return instance;
     }
 
+    private FactoryBorder() { }
+
     @Override
     public Bouncable createCircle() {
         return new CircleBorder();
